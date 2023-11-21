@@ -5,8 +5,7 @@ class Store {
     constructor(initState = {}) {
         this.state = initState;
         this.listeners = []; // Слушатели изменений состояния
-        this.codeCounter = this.state.list.length;
-        console.log(this.codeCounter);
+        this.codeCounter = this.state.list.length; // Initial для генерации кодов записи
     }
 
     /**
@@ -40,6 +39,10 @@ class Store {
         for (const listener of this.listeners) listener();
     }
 
+    /**
+     * Генерация уникального кода, сначала я сделал простой рандомайзер, который мапил в newCode, но: 1. Это не очень удовлетворяло условиям, так как при удалении кода, мог сгенерироваться этот же код заново,
+     * 2. Так или иначе цифры получались огромные. Ввиду чего я просто ввел стартовую переменную, которая будет увеличиваться от числа длинны дефолтного стора, то есть новая запись будет 8 потом 9 итд. Но при удалении 9 следующая будет все таки 10, а не снова 9.
+     */
     generateUniqueCode() {
         this.codeCounter++;
         return this.codeCounter;
@@ -81,7 +84,7 @@ class Store {
                 } else {
                     item.selected = !item.selected;
                     if (item.selected) {
-                        item.selectionCount = (item.selectionCount || 0) + 1;
+                        item.selectionCount = (item.selectionCount || 0) + 1; // Если была выделена, то увеличиваем счетчик выделенных
                     }
                 }
                 return item;
