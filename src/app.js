@@ -1,5 +1,5 @@
 import React from "react";
-import { createElement } from "./utils.js";
+import { createElement, pluralize } from "./utils.js";
 import "./styles.css";
 
 /**
@@ -25,7 +25,10 @@ function App({ store }) {
                             <div className={"Item" + (item.selected ? " Item_selected" : "")} onClick={() => store.selectItem(item.code)}>
                                 <div className="Item-code">{item.code}</div>
                                 <div className="Item-title">
-                                    {item.title} {item.selectionCount > 0 ? `| Выделяли ${item.selectionCount} раз` : null}
+                                    {item.title}{" "}
+                                    {item.selectionCount > 0
+                                        ? `| Выделяли ${item.selectionCount} ${pluralize(item.selectionCount, "раз", "раза", "раз")}`
+                                        : null}
                                 </div>
 
                                 <div className="Item-actions">
