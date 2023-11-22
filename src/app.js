@@ -22,7 +22,7 @@ function App({ store }) {
                 <div className="List">
                     {list.map((item) => (
                         <div key={item.code} className="List-item">
-                            <div className={"Item" + (item.selected ? " Item_selected" : "")} onClick={() => store.selectItem(item.code)}>
+                            <div className={"Item" + (item.selected ? " Item_selected" : "")} onClick={(e) => store.selectItem(item.code)}>
                                 <div className="Item-code">{item.code}</div>
                                 <div className="Item-title">
                                     {item.title}{" "}
@@ -30,9 +30,16 @@ function App({ store }) {
                                         ? `| Выделяли ${item.selectionCount} ${pluralize(item.selectionCount, "раз", "раза", "раз")}`
                                         : null}
                                 </div>
-
+                                {/* Добавлено stopPropagation(), что бы запретить передачу клика к родителю */}
                                 <div className="Item-actions">
-                                    <button onClick={() => store.deleteItem(item.code)}>Удалить</button>
+                                    <button
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            store.deleteItem(item.code);
+                                        }}
+                                    >
+                                        Удалить
+                                    </button>
                                 </div>
                             </div>
                         </div>

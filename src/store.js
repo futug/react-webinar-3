@@ -53,7 +53,6 @@ class Store {
      */
     addItem() {
         const newCode = this.generateUniqueCode();
-        console.log(newCode);
         this.setState({
             ...this.state,
             list: [...this.state.list, { code: newCode, title: "Новая запись" }],
