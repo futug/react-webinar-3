@@ -1,3 +1,5 @@
+import Store from "./store";
+
 const propNames = new Set(["id", "className", "textContent", "onclick"]);
 
 /**

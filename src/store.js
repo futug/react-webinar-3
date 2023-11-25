@@ -5,7 +5,7 @@ class Store {
     constructor(initState = {}) {
         this.state = initState;
         this.listeners = []; // Слушатели изменений состояния
-        this.codeCounter = this.state.list.length; // Initial для генерации кодов записи
+        this.codeCounter = Math.max(...this.state.list.map((item) => item.code));
     }
 
     /**
